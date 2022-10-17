@@ -1,6 +1,7 @@
 from PyQt6.QtWidgets import QWidget, QLCDNumber, QSlider
 from PyQt6.QtCore import pyqtSlot, pyqtSignal
 from PyQt6 import uic
+from Burner import Burner
 
 
 class Controller(QWidget):
@@ -12,10 +13,16 @@ class Controller(QWidget):
     changedTempKitchen = pyqtSignal(int)
     changedTempLiving = pyqtSignal(int)
 
+    slotValueFrostchutz = pyqtSlot(int)
+    signalForstschutz = pyqtSignal(int)
+
+
     def __init__(self, parent=None):
         super(Controller, self).__init__(parent)
 
         uic.loadUi("controller.ui", self)
+
+        self.burner = Burner()
 
         self.lcdNumberOffice = self.findChild(QLCDNumber, "lcdNumbeOffice")
         self.lcdNumberLiving = self.findChild(QLCDNumber, "lcdNumberLiving")
@@ -37,3 +44,6 @@ class Controller(QWidget):
 
     def valueKitchen(self, soll):
         self.changedTempKitchen.emit(soll)
+
+    def slotValueFrostschutz(self, soll):
+        self.signalForstschutz.connect(self.burner.Frostschutz(self.changedTempKitchen, self.changedTempOffice, self.changedTempLiving))

@@ -2,7 +2,6 @@ from PyQt6.QtWidgets import QWidget, QTextBrowser
 from PyQt6.QtCore import pyqtSlot
 from PyQt6 import uic
 
-
 class Heater(QWidget):
     textOffice = pyqtSlot(int)
     textLiving = pyqtSlot(int)

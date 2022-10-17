@@ -9,5 +9,6 @@ class MyMainWindow(QMainWindow):
 
         self.setCentralWidget(HeatControlWidget(self))
 
-        #self.setMinimumSize(800, 600)
-        #self.setMaximumSize(1024, 720)
+
+        self.setMinimumSize(800, 600)
+        self.setMaximumSize(1024, 720)
