@@ -3,6 +3,7 @@ from PyQt6.QtCore import QTimer, pyqtSlot, pyqtSignal
 from Controller import Controller
 from Heater import Heater
 from Burner import Burner
+from NotAus import NotAus
 
 
 class HeatControlWidget(QWidget):
@@ -31,6 +32,7 @@ class HeatControlWidget(QWidget):
         self.heater = Heater(self)
         self.controller = Controller(self)
         self.burner = Burner(self)
+        self.notaus = NotAus(self)
         self.signalVorlauf.connect(self.burner.valueVorlauf)
         self.signalRuecklauf.connect(self.burner.valueRuecklauf)
 
@@ -69,6 +71,7 @@ class HeatControlWidget(QWidget):
         myLayout.addWidget(self.controller)
         myLayout.addWidget(self.heater)
         myLayout.addWidget(self.burner)
+        myLayout.addWidget(self.notaus)
 
         self.setLayout(myLayout)
 

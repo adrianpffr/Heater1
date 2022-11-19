@@ -1,6 +1,8 @@
 from PyQt6.QtWidgets import QWidget, QLCDNumber, QSlider
 from PyQt6.QtCore import pyqtSlot, pyqtSignal
 from PyQt6 import uic
+
+import NotAus
 from Burner import Burner
 
 
@@ -15,6 +17,8 @@ class Controller(QWidget):
 
     slotValueFrostchutz = pyqtSlot(int)
     signalForstschutz = pyqtSignal(int)
+
+    slotNotaus = pyqtSlot(bool)
 
 
     def __init__(self, parent=None):
@@ -47,3 +51,7 @@ class Controller(QWidget):
 
     def slotValueFrostschutz(self, soll):
         self.signalForstschutz.connect(self.burner.Frostschutz(self.changedTempKitchen, self.changedTempOffice, self.changedTempLiving))
+
+    def signalNotaus(self, wert):
+        self.verticalSliderLiving.setDisabled(wert)
+
